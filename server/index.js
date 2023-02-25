@@ -14,6 +14,7 @@ const DB = "mongodb+srv://Oluwamayowa:Oluwamayowa247@cluster0.g4gmujw.mongodb.ne
 //Middleware (CLIENT MIDDLEWARE-> SERVER -> CLIENT)
 
 //middleware
+app.use(express.json());
 app.use(authRouter);
 
 //connections
