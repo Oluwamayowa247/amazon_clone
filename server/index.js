@@ -26,8 +26,8 @@ mongoose.connect(DB).then(()=>{
     console.log(e);
 
 });
-
-app.listen(PORT, () =>{
+//port 3000 = local host ad ip address "0.0.0.0" can be accessed anywhere
+app.listen(PORT, "0.0.0.0", () =>{
     console.log(`connected at port ${PORT}`);
 
 });

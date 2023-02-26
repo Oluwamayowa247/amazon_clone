@@ -38,7 +38,7 @@ const userSchema = mongoose.Schema({
         type: String,
         default: '',
      },
-
+//type defaulted to user
      type:{
         type: String,
         default: 'user',

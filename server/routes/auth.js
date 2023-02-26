@@ -7,6 +7,8 @@ const authRouter = express.Router();
 // authRouter.get('/user', (req, res)=>{
 //     res.json({msg: "User Found"});
 // });
+
+//signup route
 authRouter.post("/api/signup", async (req, res) => {
   try {
     //get data from client
