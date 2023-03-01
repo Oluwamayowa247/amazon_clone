@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
           user.toJson(),
         ),
       ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
     );
   }
 }

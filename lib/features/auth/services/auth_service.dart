@@ -78,11 +78,16 @@ class AuthService {
         onSuccess: (() async {
           print(res.statusCode);
           print(res.body);
+
+          
           //init shared preferences
 
           SharedPreferences prefs = await SharedPreferences.getInstance();
+     
+          // ignore: use_build_context_synchronously
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString("auth-token", jsonDecode(res.body)['token']);
+          // ignore: use_build_context_synchronously
           Navigator.pushNamedAndRemoveUntil(
               context, HomeScreen.routeName, (route) => false);
         }),
