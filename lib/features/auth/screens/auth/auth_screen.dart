@@ -1,8 +1,9 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
+import 'package:amazon_clone/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common/widgets/custom_textfield.dart';
-import '../../../constants/global_variable.dart';
+import '../../../../common/widgets/custom_textfield.dart';
+import '../../../../constants/global_variable.dart';
 
 enum Auth {
   signin,
@@ -21,10 +22,11 @@ class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
-  // final AuthService authService = AuthService();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final AuthService authService = AuthService();
 
   @override
   void dispose() {
@@ -32,6 +34,21 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+        email: _emailController.text,
+        context: context,
+        name: _nameController.text,
+        password: _passwordController.text);
+  }
+
+  void signInUser() {
+    authService.signInUser(
+        email: _emailController.text,
+        context: context,
+        password: _passwordController.text);
   }
 
   // void signUpUser() {
@@ -63,9 +80,10 @@ class _AuthScreenState extends State<AuthScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Welcome',
+                  'Welcome 😀',
                   style: TextStyle(
                     fontSize: 22,
+                    fontFamily: 'myNerve',
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -76,8 +94,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   title: const Text(
                     'Create Account',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontWeight: FontWeight.bold, fontFamily: 'myNerve'),
                   ),
                   leading: Radio(
                     activeColor: GlobalVariables.secondaryColor,
@@ -92,7 +109,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 if (_auth == Auth.signup)
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(10),
                     color: GlobalVariables.backgroundColor,
                     child: Form(
                       key: _signUpFormKey,
@@ -115,10 +132,10 @@ class _AuthScreenState extends State<AuthScreen> {
                           const SizedBox(height: 10),
                           CustomButton(
                             text: 'Sign Up',
-                            onPressed: () {
-                              // if (_signUpFormKey.currentState!.validate()) {
-                              //   signUpUser();
-                              // }
+                            onTap: () {
+                              if (_signUpFormKey.currentState!.validate()) {
+                                signUpUser();
+                              }
                             },
                           )
                         ],
@@ -132,8 +149,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   title: const Text(
                     'Sign-In.',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontWeight: FontWeight.bold, fontFamily: 'myNerve'),
                   ),
                   leading: Radio(
                     activeColor: GlobalVariables.secondaryColor,
@@ -148,7 +164,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 if (_auth == Auth.signin)
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(10),
                     color: GlobalVariables.backgroundColor,
                     child: Form(
                       key: _signInFormKey,
@@ -166,7 +182,10 @@ class _AuthScreenState extends State<AuthScreen> {
                           const SizedBox(height: 10),
                           CustomButton(
                             text: 'Sign In',
-                            onPressed: () {
+                            onTap: () {
+                              if (_signInFormKey.currentState!.validate()) {
+                                signInUser();
+                              }
                               // if (_signInFormKey.currentState!.validate()) {
                               //   signInUser();
                               // }

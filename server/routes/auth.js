@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/user");
-//bcrypt : alllows for encryption of password
+//bcrypt : allows for encryption of password
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authRouter = express.Router();
@@ -53,13 +53,14 @@ authRouter.post("/api/signin", async (req, res) => {
         .status(400)
         .json({ msg: "User with this email does not exist !!!" });
     }
-   const matchedPassword = await bcryptjs.compare(password, user.password );
+    const matchedPassword = await bcryptjs.compare(password, user.password);
 
-   if(!matchedPassword){
-    return  res
-    .status(400)
-    .json({ msg: "Incorrect password !!!" });
-   }
+    if (!matchedPassword) {
+      return res.status(400).json({ msg: "Incorrect password !!!" });
+    }
+    //to secure transfer login details on json fomat
+    const token = jwt.sign({ id: user._id }, "passwordKey");
+    res.json({ token, ...user._doc });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
