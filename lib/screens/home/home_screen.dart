@@ -14,16 +14,18 @@ class _HomeScreenState extends State<HomeScreen> {
  @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('HomeScreen!'),
-      ),
-      body: Center(
-        child: Text(
-          user.toJson(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('HomeScreen!'),
         ),
+        body: Center(
+          child: Text(
+            user.toJson(),
+          ),
+        ),
+        backgroundColor: Colors.white,
       ),
-      backgroundColor: Colors.white,
     );
   }
 }

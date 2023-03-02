@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/features/auth/screens/home/home_screen.dart';
+import 'package:amazon_clone/screens/home/home_screen.dart';
 import 'package:amazon_clone/model/user.dart';
 import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:flutter/cupertino.dart';
